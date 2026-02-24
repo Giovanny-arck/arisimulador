@@ -1,0 +1,225 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES BASE
+   ========================================================================== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fb;
+    color: #333;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   2. ESTRUTURA DO FORMULÁRIO (GRIDS)
+   ========================================================================== */
+.form-section {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+
+/* Layout de 2 Colunas no Desktop */
+@media (min-width: 1024px) {
+    .grid-investimento {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 30px;
+        align-items: start;
+    }
+}
+
+/* Layout Empilhado no Mobile */
+@media (max-width: 1023px) {
+    .grid-investimento {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.form-section h3 {
+    margin: 0 0 15px 0;
+    color: #071F3A;
+    font-size: 1.2em;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    color: #071F3A;
+}
+
+.obrigatorio {
+    color: red;
+    margin-left: 2px;
+}
+
+/* ==========================================================================
+   3. BOTÕES DE SELEÇÃO E TOOLTIPS
+   ========================================================================== */
+.button-group-tooltips {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Espaçamento para os botões de prazo */
+#selecao-prazo .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+@media (max-width: 600px) {
+    .button-group-tooltips {
+        flex-direction: column; 
+    }
+}
+
+.btn-wrapper {
+    position: relative;
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+/* Padronização dos Botões */
+.recebimento-btn, 
+.prazo-btn {
+    width: 100%;
+    background: #071F3A;
+    color: #ffffff;
+    padding: 12px 35px 12px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Estado Selecionado (Cinza) */
+.recebimento-btn.selected, 
+.prazo-btn.selected {
+    background-color: #555555 !important; 
+    color: white !important;
+    border-color: #333333;
+    transform: scale(0.98);
+}
+
+.recebimento-btn:hover:not(.selected) {
+    background-color: #0d2f57;
+}
+
+/* Ícone de Interrogação */
+.info-icon {
+    position: absolute;
+    right: 10px;
+    width: 18px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    cursor: help;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+/* Tooltip (Balão) */
+.info-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 130%;
+    right: 0;
+    width: 200px;
+    background: #071F3A;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: normal;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.info-icon:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ==========================================================================
+   4. INPUTS, TABELAS E IMAGENS
+   ========================================================================== */
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 14px 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.image-container {
+    max-width: 1000px;
+    margin: 0 auto 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-responsive-image {
+    width: 100%;
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
+
+th { background: #071F3A; color: white; padding: 15px 10px; }
+td { padding: 12px 10px; text-align: center; border: 1px solid #eee; }
+
+/* Tabela Responsiva para Mobile */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr { display: block; }
+    thead tr { position: absolute; top: -9999px; left: -9999px; }
+    tr { border: 1px solid #ddd; margin-bottom: 10px; border-radius: 8px; }
+    td { border: none; border-bottom: 1px solid #eee; position: relative; padding-left: 50%; text-align: right; }
+    td::before {
+        content: attr(data-label);
+        position: absolute; left: 10px; width: 45%; padding-right: 10px;
+        white-space: nowrap; font-weight: bold; text-align: left; color: #071F3A;
+    }
+}

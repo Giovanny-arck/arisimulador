@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/img banner/favicon-ari.png">
+<title>Simulador de Investimentos ARI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="image-container">
+    <img src="/img banner/capa simulador atual.png" alt="Investimento ARI" class="form-responsive-image">
+</div>
+<div class="container">
+
+    <div class="form-section dados-investimento">
+        <h3>Dados do Investimento <span class="obrigatorio"></span></h3>
+        <div class="grid-investimento">
+            <div class="valor-investido-container">
+                <label>Valor Investido (R$) <span class="obrigatorio"></span></label>
+                <input type="text" id="valor" list="valoresSugeridos" placeholder="Digite ou selecione" required min="20000">
+                <datalist id="valoresSugeridos">
+                    <option value="R$ 20.000,00">
+                    <option value="R$ 30.000,00">
+                    <option value="R$ 40.000,00">
+                    <option value="R$ 50.000,00">
+                    <option value="R$ 75.000,00">
+                    <option value="R$ 100.000,00">
+                    <option value="R$ 125.000,00">
+                    <option value="R$ 150.000,00">
+                    <option value="R$ 200.000,00">
+                    <option value="R$ 250.000,00">
+                    <option value="R$ 300.000,00">
+                    <option value="R$ 400.000,00">
+                </datalist>
+            </div>
+            
+            <div class="forma-recebimento-container" id="container-forma-recebimento">
+                <label>Forma de Recebimento <span class="obrigatorio"></span></label>
+                <div class="button-group">
+                    <button type="button" id="btn-final" class="recebimento-btn" onclick="selecionarForma('final')">Rendimento no Final</button>
+                    <button type="button" id="btn-mensal" class="recebimento-btn" onclick="selecionarForma('mensal')">Rendimento Mensal</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="tabela-resultados">
+            <table id="resultado">
+                <thead id="resultado-head">
+                    <tr><th>Prazo</th><th>Retorno Total</th><th>Taxa Efetiva a.m.</th></tr>
+                </thead>
+                <tbody id="resBody">
+                    <tr><td>18 meses</td><td>-</td><td>-</td></tr>
+                    <tr><td>24 meses</td><td>-</td><td>-</td></tr>
+                    <tr><td>36 meses</td><td>-</td><td>-</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+         <div id="tabela-faixas" class="info-box" style="margin-top: 20px;">
+            <h4><strong>Faixas de valores</strong></h4>
+             <p>Os investimentos estão organizados em cinco faixas de valores, que vão da Faixa 1 até a Faixa 5. Cada faixa representa um nível de aporte, 		permitindo que o investidor escolha a opção mais adequada ao seu perfil e objetivos financeiros:</p>
+             <p>Faixa 1 -  20.000 a 99.999</p>   
+             <p>Faixa 2 - 100.000 a 199.999</p>
+             <p>Faixa 3 - 200.000 a 399.999</p>
+             <p>Faixa 4 - Acima de 400.000 </p>
+        </div>
+        
+        
+        <div id="texto-explicativo-mensal" class="info-box" style="display: none;">
+            <h4>💡 Como funciona o Rendimento Mensal?</h4>
+            <p>No <strong>Rendimento Mensal</strong>, você recebe o seu rendimento mensalmente e seu capital investido no fim do prazo do seu contrato.</p>
+        </div>
+        
+        <div id="texto-explicativo-final" class="info-box">
+            <h4>💡 Como funciona o Rendimento no Final?</h4>
+            <p>No <strong>Rendimento no Final</strong>, você recebe o rendimento maior e o seu capital investido no fim do prazo de seu contrato.</p>
+        </div>
+        
+        <div class="form-section" id="selecao-prazo">
+            <h3>Selecione o seu prazo <span class="obrigatorio">*</span></h3>
+            <div class="button-group">
+                <button type="button" class="prazo-btn" onclick="selecionarPrazo(18)">18 meses</button>
+                <button type="button" class="prazo-btn" onclick="selecionarPrazo(24)">24 meses</button>
+                <button type="button" class="prazo-btn" onclick="selecionarPrazo(36)">36 meses</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-section" id="dados-cliente-section" style="display: none;">
+        <h3>Dados do Cliente <span class="obrigatorio"></span></h3>
+        <div class="grid grid-cliente">
+            <div>
+                <label>Cliente <span class="obrigatorio">*</span></label>
+                <input type="text" id="cliente" required placeholder="Nome completo">
+            </div>
+            <div>
+                <label>E-mail <span class="obrigatorio">*</span></label>
+                <input type="email" id="email" required placeholder="E-mail">
+            </div>
+            <div>
+                <label>Profissão <span class="obrigatorio">*</span></label>
+                <input type="text" id="profissao" required placeholder="Profissão">
+            </div>
+            <div>
+                <label>Contato <span class="obrigatorio">*</span></label>
+                <input type="text" id="contato" required placeholder="(DDD) xxxxx-xxxx">
+                <div id="contato-erro" class="mensagem-erro" style="display: none;">Por favor, inclua o DDD (mínimo 10 dígitos).</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="terms-section" id="terms-section" style="display: none;">
+        <div class="checkbox-container">
+            <input type="checkbox" id="terms-checkbox">
+            <label for="terms-checkbox">
+                Declaro que as informações fornecidas nesta simulação são de minha inteira responsabilidade e estou ciente de que esta proposta tem caráter preliminar, não configurando garantia de rentabilidade ou obrigação contratual.
+                Estou de acordo que os valores apresentados são apenas estimativas, podendo variar conforme as condições do mercado e a análise final da empresa.
+                Autorizo o envio dos meus dados para contato e para a continuidade do processo de avaliação da proposta de investimento.
+            </label>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" id="btn-enviar" onclick="enviarProposta()" style="display: none;" disabled>Enviar Proposta</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
